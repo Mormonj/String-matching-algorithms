@@ -1,0 +1,10 @@
+def is_palindrome(s: str) -> bool:
+    cleaned_string = ''.join(s.split())#splitov miacnum  enq irar u reverse return talis
+    return cleaned_string == cleaned_string[::-1]
+
+
+input_string = "agarakkaraga"
+if is_palindrome(input_string):
+    print(f'"{input_string}" palindroma.')
+else:
+    print(f'"{input_string}" yavni polindrom chi.')
