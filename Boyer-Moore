@@ -1,0 +1,38 @@
+def create_bad_character_table(pattern):
+    """ create_bad_character_table stecum enq bararan,vorde amen mi simvoli hamar nshvum a et simvoli verjin indexy."""
+    bad_char_table = {}
+    for i, char in enumerate(pattern):
+        bad_char_table[char] = i
+    return bad_char_table
+
+def boyer_moore(text, pattern):
+    """ boyer_moore toxum shablnoi poisky ajic dzax a linum.."""
+    bad_char_table = create_bad_character_table(pattern)
+    m = len(pattern)
+    n = len(text)
+
+    skip = 0
+    while n - skip >= m:
+        j = m - 1
+        while j >= 0 and pattern[j] == text[skip + j]:
+            j -= 1
+        if j < 0:
+            print(f"indexner {skip}")
+            skip += (m - bad_char_table.get(text[skip + m], -1)) if skip + m < n else 1
+        else:
+            skip += max(1, j - bad_char_table.get(text[skip + j], -1))
+
+
+text = "ABAAABCDABABCDABCAABCDABDE"
+pattern = "ABCD"
+boyer_moore(text, pattern)
+'''+-------+----+
+| tarr| index |
++-------+----+
+|   A   |  0  |
+|   B   |  1  |
+|   C   |  2  |
+|   D   |  3  |
++-------+----+
+
+.'''
