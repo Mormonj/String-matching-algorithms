@@ -1,0 +1,23 @@
+def naive_string_matching(text, pattern):
+    """:param text: tox urde pti entatoxy charvi.
+    :pattern:entatox vory pti charvi.
+    :return: amen patterni skselu indexneri cucak.
+    """
+    n = len(text)   
+    m = len(pattern) 
+    positions = []  
+    #  texti tarreri bolor indexneri vrov ancnuma ,  0indexic minchev n - m + 1,
+    for i in range(n - m + 1):
+        match = True
+        for j in range(m):
+            if text[i + j] != pattern[j]:#i + j  et pahin ditarkvox texti tarri indexna ete chi hamnknum break u hajrodin a  ancnum,
+                match = False
+                break
+        if match:
+            positions.append(i)
+    return positions
+
+text = "acacara"
+pattern = "aca"
+result = naive_string_matching(text, pattern)
+print(f" '{pattern}' hadipum a '{text}' : {result} pozicianerum")
