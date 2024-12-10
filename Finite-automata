@@ -1,0 +1,36 @@
+def compute_transition_function(pattern, alphabet):
+    """shabloni himan vra functia stexcenq vor sranov avtomaty shabloni vra fra u nmanutyuny vhari,mer shablon-pattern-i,vra frralov erkchap zangvac sgtexcvi vor entatoxeri mej nmanutyunic zerc mnanq u tarrery  hamnkneluc heto stacvi mer avtomaty verjnakan ytesqi ekac,aysinqn tarrery hamnkel a  
+    """
+    m = len(pattern)
+    transition_function = [[0] * len(alphabet) for _ in range(m + 1)]
+
+    for q in range(m + 1):
+        for i, a in enumerate(alphabet):
+            k = min(m, q + 1)#k mer avtomati erkutyunn a erb vor sahbloni vrayov gnum a u max len(m)+a  a hasnum tenum chi hamnknum tarry k-1 anum
+            while k > 0 and pattern[:k] != pattern[:q] + a:
+                k -= 1
+            transition_function[q][i] = k
+
+    return transition_function
+
+
+def finite_automata_string_matching(text, pattern):
+
+    alphabet = list(set(text)) 
+    transition_function = compute_transition_function(pattern, alphabet)
+    n = len(text)
+    m = len(pattern)
+    q = 0 
+    positions = []
+
+    for i in range(n):
+        char_index = alphabet.index(text[i])
+        q = transition_function[q][char_index]
+        if q == m:
+            positions.append(i - m + 1)
+
+    return positions
+text = "abababac"
+pattern = "abab"
+result = finite_automata_string_matching(text, pattern)
+print(f" {result}")
