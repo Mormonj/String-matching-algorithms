@@ -1,0 +1,15 @@
+from collections import Counter
+
+def can_be_palindromic(s: str):
+    #hashvum enq amen simvoli qanakhy
+    char_counts = Counter(s)
+    # hashvum enq en symboneri qanaky voronq kent en
+    odd_count = sum(1 for count in char_counts.values() if count % 2 != 0)
+    # polindrom klni ete maximum mi tiv ka vory handipum a kent qanakov
+    return odd_count <= 1
+
+input_string = "civic"
+if can_be_palindromic(input_string):
+    print(f'"{input_string}"kara polidrom ylni.')
+else:
+    print(f'"{input_string}" chi kara.')
